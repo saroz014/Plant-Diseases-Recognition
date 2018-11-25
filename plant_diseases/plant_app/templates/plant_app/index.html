@@ -1,0 +1,41 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'plant_app/styleeeee.css' %}">
+<link rel="stylesheet" href="{% static 'plant_app/bootstrap.min.css' %}">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Plant Diseases</title>
+  </head>
+  <body>
+    <div id='name' class='container'>
+      <header>
+          <h1 id='head1'><strong>Plant Diseases</h1>
+            <h1 id='head1'><strong>Recognition</h1>
+      </header>
+        <p></p>
+    <form method="post" id="fileform" enctype="multipart/form-data">
+    {% csrf_token %} 
+    <div class="file-upload">
+      <div class="file-select">
+          <div class="file-select-button" id="fileName">Choose File</div>
+        <div class="file-select-name" id="noFile">No file chosen...</div> 
+        <input id="chooseFile" type="file" name="myfile">
+      </div>
+    </div>
+    <button id="sub" class="btn btn-success btn-lg" type="submit">Predict</button>
+  </form>
+  
+
+  {% if file_url %}
+  <h1 id='filename'><strong>{{ result }}</h1>
+  <img src={{ file_url }}>
+  {% endif %}
+    </div>
+    
+    
+  </body>
+  <script type="text/javascript" src="{% static 'plant_app/jQuery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'plant_app/effect.js' %}"></script>
+</html>
+
