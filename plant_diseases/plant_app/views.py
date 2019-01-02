@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from PIL import Image
@@ -8,7 +6,10 @@ from keras.preprocessing import image
 import numpy as np
 import tensorflow as tf
 from keras.models import load_model
-import keras.backend as K
+global graph, mod
+
+graph = tf.get_default_graph()
+mod = load_model('plant_app/AlexNetModel.hdf5')
 
 # Create your views here.
 
@@ -59,17 +60,17 @@ def index(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         m = str(filename)
-        K.clear_session()
         im = Image.open("media/" + m)
         j = im.resize((224, 224),)
         l = "predicted.jpg"
         j.save("media/" + l)
         file_url = fs.url(l)
-        mod = load_model('plant_app/model.hdf5', compile=False)
         img = image.load_img(myfile, target_size=(224, 224))
-        x = image.img_to_array(img)
-        x = np.expand_dims(x, axis=0)
-        preds = mod.predict(x)
+        img = image.img_to_array(img)
+        img = np.expand_dims(img, axis=0)
+        img = img/255
+        with graph.as_default():
+            preds = mod.predict(img)
         d = preds.flatten()
         j = d.max()
         for index, item in enumerate(d):
