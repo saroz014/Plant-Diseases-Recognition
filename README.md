@@ -51,5 +51,5 @@
   
   
 # Download model from the following link and paste it in the same folder as views.py: 
-  https://drive.google.com/file/d/14aNJaU05nHCefO8aFd1bCbzfkdnalecf/view
+  https://drive.google.com/file/d/1FZXraDDPqbRTX-QeiQclfojgtoLddxQ_/view
 
