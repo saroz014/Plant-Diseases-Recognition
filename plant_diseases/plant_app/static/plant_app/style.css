@@ -12,10 +12,10 @@ header {
 	display: block;
 	margin-top: auto;
 	margin-bottom: auto;
-  margin-left: 25%;
+    margin-left: 25%;
 	box-sizing: border-box;
 	position: relative;
-  width: 50%;
+    width: 50%;
 }
 
 #name {
@@ -28,7 +28,7 @@ header {
   font-family: 'Trebuchet MS';
 }
 
-#filename {
+#fileName {
   font-size: 300%;
 }
 
@@ -153,5 +153,5 @@ header {
 }
 
 .file-select-name {
-  font-size: 13px;
+  font-size: 6px;
 }

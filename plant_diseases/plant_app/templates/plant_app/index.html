@@ -29,7 +29,7 @@
 
   {% if file_url %}
   <h1 id='filename'><strong>{{ result }}</h1>
-  <img src={{ file_url }}>
+  <img src="data:image/png;base64,{{file_url}}" style="width:224px;height:224px;">
   {% endif %}
 
     </div>
