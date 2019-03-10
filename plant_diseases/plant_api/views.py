@@ -14,8 +14,6 @@ class Predict(generics.CreateAPIView):
             API to send leaf image and get its health status or disease.
         """
         data = ImageSerializer(data=request.data)
-        print(data.is_valid())
-        print(data.validated_data)
         if data.is_valid():
             photo = request.data['photo']
             img = image.load_img(photo, target_size=(224, 224))
@@ -27,10 +25,7 @@ class Predict(generics.CreateAPIView):
                 prediction = model.predict(img)
 
             prediction_flatten = prediction.flatten()
-            max_value = prediction_flatten.max()
-
-            for index, item in enumerate(prediction_flatten):
-                if item == max_value:
-                    result = output_list[index]
+            max_val_index = np.argmax(prediction_flatten)
+            result = output_list[max_val_index]
 
             return Response({'result': result})

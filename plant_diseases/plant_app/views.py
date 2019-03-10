@@ -18,13 +18,10 @@ def index(request):
             prediction = model.predict(img)
 
         prediction_flatten = prediction.flatten()
-        max_value = prediction_flatten.max()
+        max_val_index = np.argmax(prediction_flatten)
+        result = output_list[max_val_index]
 
-        for index, item in enumerate(prediction_flatten):
-            if item == max_value:
-                result = output_list[index]
-
-                return render(request, "plant_app/index.html", {
-                                 'result': result, 'file_url': b64_img })
+        return render(request, "plant_app/index.html", {
+            'result': result, 'file_url': b64_img })
 
     return render(request, "plant_app/index.html")
