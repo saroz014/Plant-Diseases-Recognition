@@ -2,12 +2,11 @@
 
 # Importing Keras libraries and packages
 from keras.models import Sequential
-from keras.layers import Convolution2D
-from keras.layers import MaxPooling2D
-from keras.layers import Flatten
-from keras.layers import Dense
-from keras.layers import Dropout
+from keras.layers import Convolution2D, MaxPooling2D, Flatten, Dense, Dropout
 from keras.layers.normalization import BatchNormalization
+from keras import optimizers
+from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import ModelCheckpoint
 
 # Initializing the CNN
 classifier = Sequential()
@@ -54,19 +53,24 @@ classifier.add(BatchNormalization())
 classifier.add(Dense(units = 1000, activation = 'relu'))
 classifier.add(Dropout(0.2))
 classifier.add(BatchNormalization())
-classifier.add(Dense(units = 38, activation = 'softmax'))
+classifier.add(Dense(units = 3, activation = 'softmax'))
 classifier.summary()
 
 
 # Compiling the CNN
-from keras import optimizers
-classifier.compile(optimizer='adam',
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
+# classifier.compile(optimizer='adam',
+#                    loss='categorical_crossentropy',
+#                    metrics=['accuracy'])
+
+
+# Compiling the CNN
+classifier.compile(optimizer=optimizers.SGD(lr=0.001, momentum=0.9, decay=0.005),
+                   loss='categorical_crossentropy',
+                   metrics=['accuracy'])
+
+
 
 # image preprocessing
-from keras.preprocessing.image import ImageDataGenerator
-
 train_datagen = ImageDataGenerator(rescale=1./255,
                                    shear_range=0.2,
                                    zoom_range=0.2,
@@ -78,29 +82,48 @@ train_datagen = ImageDataGenerator(rescale=1./255,
 
 test_datagen = ImageDataGenerator(rescale=1./255)
 
-training_set = train_datagen.flow_from_directory('../input/plant-disease/dataset/dataset/train',
+batch_size = 32
+
+train_data_dir = ""     # directory of training data
+
+test_data_dir = ""      # directory of test data
+
+training_set = train_datagen.flow_from_directory(train_data_dir,
                                                  target_size=(224, 224),
-                                                 batch_size=32,
+                                                 batch_size=batch_size,
                                                  class_mode='categorical')
 
-test_set = test_datagen.flow_from_directory('../input/plant-disease/dataset/dataset/test',
+test_set = test_datagen.flow_from_directory(test_data_dir,
                                             target_size=(224, 224),
-                                            batch_size=32,
+                                            batch_size=batch_size,
                                             class_mode='categorical')
 
-# checkpoint
-from keras.callbacks import ModelCheckpoint
-weightpath = "weights_1.hdf5"
-checkpoint = ModelCheckpoint(weightpath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
-callbacks_list = [checkpoint]
+print(training_set.class_indices)
+
+
+# # checkpoint
+# weightpath = "weights_1.hdf5"
+# checkpoint = ModelCheckpoint(weightpath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+# callbacks_list = [checkpoint]
+#
+#
+# #fitting images to CNN
+# history = classifier.fit_generator(training_set,
+#                          steps_per_epoch=training_set.samples//batch_size,
+#                          validation_data=test_set,
+#                          epochs=50,
+#                          validation_steps=test_set.samples//batch_size,
+#                          callbacks=callbacks_list)
+
 
 #fitting images to CNN
 history = classifier.fit_generator(training_set,
-                         steps_per_epoch=43456//32,
-                         validation_data=test_set,
-                         epochs=50,
-                         validation_steps=10849//32,
-                         callbacks=callbacks_list)
+                                   steps_per_epoch=training_set.samples//batch_size,
+                                   validation_data=test_set,
+                                   epochs=50,
+                                   validation_steps=test_set.samples//batch_size)
+
+
 #saving model
 filepath="model.hdf5"
 classifier.save(filepath)
@@ -132,4 +155,4 @@ plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
 
-plt.show() 
+plt.show()
