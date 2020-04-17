@@ -69,15 +69,15 @@
     > py manage.py runserver
 
   06. A link will appear in your command prompt. Copy this link and paste it in your browser, press enter.
-    ![alt text](screenshots\runserver_link.jpg)
+    ![](screenshots/runserver_link.JPG "Copy this address")
 
   07. Your application is running. Choose any infected image to get results.
 
 # Screenshots
   
-  ![](screenshots/home.png)
+  ![](screenshots/home.png "Home Page")
 
-  ![](screenshots/choose_img.png)
+  ![](screenshots/choose_img.png "Choose Image")
 
   ![](screenshots/Output_img.png "Output of running manage.py")
 
