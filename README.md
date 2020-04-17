@@ -49,7 +49,37 @@
   05. PIL
   06. Numpy
   
+# Steps to sun the application:
+**This application requires Python 3.6 or higher**
+
+  01. Download the repository by clicking on the download button or type the following command in CMD to clone the repository:
+    > git clone https://github.com/saroz014/Plant-Diseases-Recognition.git
+
+  02. Download model from the following link and paste it in the `\plant_diseases\plant_app` folder: 
+    https://drive.google.com/file/d/1FZXraDDPqbRTX-QeiQclfojgtoLddxQ_/view
+
+  03. (Optional) Create a virtual enviourment. Refer this tutorial to learn how to create a virtual enviourment:
+    https://www.youtube.com/watch?v=APOPm01BVrk
+    **If you create a virtual enviourment, make sure it is activated and you execute all commands from withing the virtual enviournment. Skip this step if you are unsure about how it works.**
+
+  04. Install required packages:
+    > pip install -r requirements.txt
+
+  05. Navigate to `\plant_diseases` directory and run the application with the following command:
+    > py manage.py runserver
+
+  06. A link will appear in your command prompt. Copy this link and paste it in your browser, press enter.
+    ![alt text](\screenshots\runserver_link.jpg "Output of running manage.py")
+
+  07. Your application is running. Choose any infected image to get results.
+
+# Screenshots
   
-# Download model from the following link and paste it in the same folder as views.py: 
-  https://drive.google.com/file/d/1FZXraDDPqbRTX-QeiQclfojgtoLddxQ_/view
+  ![alt text](\screenshots\home.png "Output of running manage.py")
+
+  ![alt text](\screenshots\choose_img.png "Output of running manage.py")
+
+  ![alt text](\screenshots\output_img.png "Output of running manage.py")
+
+
 
