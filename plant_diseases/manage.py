@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
+import tensorflow as tf 
 
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'plant_diseases.settings')
