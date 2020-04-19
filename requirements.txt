@@ -32,7 +32,7 @@ requests==2.23.0
 scipy==1.4.1
 six==1.14.0
 tensorboard==1.15.0
-tensorflow==1.15
+tensorflow==1.15.2
 termcolor==1.1.0
 uritemplate==3.0.1
 urllib3==1.25.8
