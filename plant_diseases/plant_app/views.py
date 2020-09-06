@@ -6,7 +6,7 @@ import base64
 
 
 def index(request):
-    if request.method == 'POST' and request.FILES['myfile']:
+    if request.method == 'POST' and request.FILES.get('myfile'):
         myfile = request.FILES['myfile']
         b64_img = base64.b64encode(myfile.file.read()).decode('ascii')
         img = image.load_img(myfile, target_size=(224, 224))
@@ -22,6 +22,6 @@ def index(request):
         result = output_list[max_val_index]
 
         return render(request, "plant_app/index.html", {
-            'result': result, 'file_url': b64_img })
+            'result': result, 'file_url': b64_img})
 
     return render(request, "plant_app/index.html")
