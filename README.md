@@ -69,7 +69,7 @@
 
   05. Navigate to `\plant_diseases` directory and run the application with the following command:
       
-      `py manage.py runserver`
+      `python manage.py runserver`
 
   06. A link will appear in your command prompt. Copy this link and paste it in your browser, press enter.
     ![](screenshots/runserver_link.JPG "Copy this address")
