@@ -6,7 +6,7 @@ chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
 distlib==0.3.0
-Django==2.2.13
+Django==2.2.24
 django-cors-headers==2.4.0
 djangorestframework==3.9.1
 filelock==3.0.12
