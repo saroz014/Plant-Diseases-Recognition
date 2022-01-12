@@ -27,7 +27,7 @@ MarkupSafe==1.1.1
 numpy==1.18.2
 opt-einsum==3.2.1
 Pillow==7.1.0
-pipenv==2018.11.26
+pipenv==2022.1.8
 protobuf==3.11.3
 pytz==2019.3
 PyYAML==5.3.1
